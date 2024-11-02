@@ -6,6 +6,7 @@ import {
   updateJob,
   deleteJob,
   filterJobs,
+  getFilteredJobs,
 } from '../controllers/jobPostController.js';
 
 const router = express.Router();
@@ -19,6 +20,7 @@ router.get('/getAllJobs', getAllJobs);
 // Get job by ID
 router.get('/getJobById/:id', getJobById);
 router.get('/jobfilter', filterJobs);
+router.get('/jobfilterHome', getFilteredJobs);
 // Update job
 router.put('/updateJob/:id', updateJob);
 

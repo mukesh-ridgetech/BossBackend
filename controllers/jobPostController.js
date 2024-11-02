@@ -199,6 +199,56 @@ export const filterJobs = async (req, res) => {
 };
 
 
+export const getFilteredJobs = async (req, res) => {
+  try {
+    const { search, category } = req.query;
+
+    // Build the query object
+    let query = {};
+
+    // { jobType: { $regex: keyword, $options: 'i' } },
+    // { category: { $regex: keyword, $options: 'i' } },
+    // { responsibilities: { $regex: keyword, $options: 'i' } },
+    // { requirements: { $regex: keyword, $options: 'i' } },
+    // { upper_jd: { $regex: keyword, $options: 'i' } },
+
+    // If search keyword is provided, use a case-insensitive regex search
+    if (search) {
+      const searchRegex = new RegExp(search, 'i'); // 'i' for case-insensitive search
+      query.$or = [
+        { jobName: { $regex: searchRegex } },
+        { jobDescription: { $regex: searchRegex } },
+        { location: { $regex: searchRegex } },
+        { jobType: { $regex: searchRegex } },
+        { category: { $regex: searchRegex } },
+        { responsibilities: { $regex: searchRegex } },
+        { requirements: { $regex: searchRegex } },
+        { upper_jd: { $regex: searchRegex } },
+      ];
+    }
+
+    // If category is provided, add it to the query
+    if (category) {
+      query.category = category;
+    }
+
+    // Query the database with the built query object
+    const jobs = await Job.find(query);
+
+    // Return filtered job postings
+    res.status(201).json({
+      success: true,
+      message: 'job Search successfully',
+      job:jobs
+  });
+
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
 // Delete a job
 export const deleteJob = async (req, res) => {
   try {
