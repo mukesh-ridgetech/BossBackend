@@ -7,6 +7,7 @@ import uploadRoutes from './routes/uploadRoutes.js';
 import sendApplicationRoutes from './routes/sendApplicationRoutes.js';
 import jobPostRoutes from './routes/jobPostRoutes.js'
 import personalDetailsRoutes from './routes/personalDetailsRoutes.js';
+import adminPostRoutes from './routes/adminPostRoutes.js'
 import cors from 'cors'
 dotenv.config();
 
@@ -27,6 +28,7 @@ app.use('/api/contacts', contactRoutes);
 app.use('/api/sendApplication', sendApplicationRoutes);
 app.use('/api/jobPost', jobPostRoutes);
 app.use('/api/personal', personalDetailsRoutes);
+app.use('/api/adminPost', adminPostRoutes);
 app.use('/api/uploadImage', uploadRoutes);
 
 // Start the server
