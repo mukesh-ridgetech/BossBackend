@@ -52,7 +52,7 @@ const jobSchema = new mongoose.Schema({
   },
   logo:{
     type:String,
-    required:true,
+    
   }
 }, { timestamps: true });
 

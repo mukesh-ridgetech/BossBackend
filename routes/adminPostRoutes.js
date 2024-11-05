@@ -15,7 +15,7 @@ const router = express.Router();
 router.post('/createAdminPost', createAdminPost);
 
 // Route to get all admin posts
-router.get('/', getAllAdminPosts);
+router.get('/getAllAdminPost', getAllAdminPosts);
 
 // Route to get a specific admin post by ID
 router.get('/:id', getAdminPostById);
