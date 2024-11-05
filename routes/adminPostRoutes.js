@@ -5,7 +5,8 @@ import {
     getAllAdminPosts,
     getAdminPostById,
     updateAdminPost,
-    deleteAdminPost
+    deleteAdminPost,
+    toggeled,
 } from '../controllers/adminPostController.js';
 // ../controllers/adminPostController.js
 
@@ -22,6 +23,8 @@ router.get('/:id', getAdminPostById);
 
 // Route to update an admin post by ID
 router.put('/:id', updateAdminPost);
+
+router.patch('/toggled/:id',  toggeled);
 
 // Route to delete an admin post by ID
 router.delete('/:id', deleteAdminPost);

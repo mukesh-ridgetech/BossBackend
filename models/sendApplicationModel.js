@@ -22,7 +22,11 @@ const sendApplicationSchema = new mongoose.Schema({
     pdf: {
         type: String,
         required: true,
-    }
+    },
+    status:{
+        type:String,
+        default:"Active"
+    },
 }, { timestamps: true });
 
 const SendApplication = mongoose.model('SendApplication', sendApplicationSchema);

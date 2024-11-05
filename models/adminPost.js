@@ -21,7 +21,11 @@ const adminPostSchema = new mongoose.Schema({
     pdf: {
         type: String,
         required: true,
-    }
+    },
+    status:{
+        type:String,
+        default:"Active"
+    },
 }, { timestamps: true });
 
 const AdminPost = mongoose.model('AdminPost', adminPostSchema);

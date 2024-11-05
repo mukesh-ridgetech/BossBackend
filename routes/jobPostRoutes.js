@@ -7,6 +7,7 @@ import {
   deleteJob,
   filterJobs,
   getFilteredJobs,
+  toggeled,
 } from '../controllers/jobPostController.js';
 
 const router = express.Router();
@@ -23,7 +24,7 @@ router.get('/jobfilter', filterJobs);
 router.get('/jobfilterHome', getFilteredJobs);
 // Update job
 router.put('/updateJob/:id', updateJob);
-
+router.patch('/toggled/:id',  toggeled);
 
 
 // Delete job

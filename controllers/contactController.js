@@ -1,4 +1,5 @@
 import Contact from '../models/contactModel.js';
+import {sendEmail} from './sendMail.js'
 
 // Create a new contact entry
 export const createContact = async (req, res) => {
@@ -7,6 +8,10 @@ export const createContact = async (req, res) => {
 
         const newContact = new Contact({ firstName, lastName, phoneNumber, email, question });
         await newContact.save();
+
+        if(newContact){
+            sendEmail(newContact)
+        }
 
         res.status(201).json({
             success: true,
@@ -21,6 +26,57 @@ export const createContact = async (req, res) => {
         });
     }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export const toggeled = async(req,res)=>{
+    try {
+     const { id } = req.params;
+    
+
+     // Find the admin by ID
+     let contact = await Contact.findById(id);
+     if(contact.status ==='Active'){
+        contact.status = "Inactive";
+     }
+     else{
+        contact.status = "Active"
+     }
+
+
+
+   const updatedcontact =  await contact.save();
+
+
+     if(updatedcontact){
+         res.status(201).send({
+             success: true,
+             message: "Contact Status updated",
+             updatedcontact
+           });
+     }
+     
+    } catch (error) {
+     res.status(500).send({
+         success: false,
+         message: "Errro in updating Vacancy status",
+         error,
+       });
+    }
+}
 
 // Get all contact entries
 export const getAllContacts = async (req, res) => {

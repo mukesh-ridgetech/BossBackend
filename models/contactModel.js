@@ -22,7 +22,12 @@ const contactSchema = new mongoose.Schema({
     question: {
         type: String,
         required: true,
-    }
+    },
+
+    status:{
+        type:String,
+        default:"Active"
+    },
 }, { timestamps: true });
 
 const Contact = mongoose.model('Contact', contactSchema);

@@ -4,7 +4,8 @@ import {
     getAllSendApplication,
     getSendApplicationById,
     updateSendApplication,
-    deleteSendApplication
+    deleteSendApplication,
+    toggeled,
 } from '../controllers/sendApplicationController.js';
 
 const router = express.Router();
@@ -20,6 +21,7 @@ router.get('/getSendApplicationById/:id', getSendApplicationById);
 
 // PUT: Update a SendApplication by ID
 router.put('/updateSendApplication/:id', updateSendApplication);
+router.patch('/toggled/:id', toggeled);
 
 // DELETE: Delete a SendApplication by ID
 router.delete('/deleteSendApplication/:id', deleteSendApplication);

@@ -53,7 +53,11 @@ const jobSchema = new mongoose.Schema({
   logo:{
     type:String,
     
-  }
+  },
+  status:{
+    type:String,
+    default:"Active"
+},
 }, { timestamps: true });
 
 const Job = mongoose.model('Job', jobSchema);

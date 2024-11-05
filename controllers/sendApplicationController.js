@@ -63,6 +63,45 @@ export const getSendApplicationById = async (req, res) => {
     }
 };
 
+
+
+
+export const toggeled = async(req,res)=>{
+    try {
+  
+     const { id } = req.params;
+    
+  
+     // Find the admin by ID
+     let application = await SendApplication.findById(id);
+     if(application.status ==='Active'){
+        application.status = "Inactive";
+     }
+     else{
+        application.status = "Active"
+     }
+  
+  
+  
+   const newapplication =  await application.save();
+  
+  
+     if(newapplication){
+         res.status(201).send({
+             success: true,
+             message: "Application Status updated",
+             newapplication
+           });
+     }
+     
+    } catch (error) {
+     res.status(500).send({
+         success: false,
+         message: "Errro in updating Application status",
+         error,
+       });
+    }
+  }
 // Update a contact entry by ID
 export const updateSendApplication = async (req, res) => {
     try {

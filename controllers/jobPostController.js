@@ -259,3 +259,42 @@ export const deleteJob = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+
+
+export const toggeled = async(req,res)=>{
+  try {
+   const { id } = req.params;
+  
+
+   // Find the admin by ID
+   let job = await Job.findById(id);
+   if(job.status ==='Active'){
+    job.status = "Inactive";
+   }
+   else{
+    job.status = "Active"
+   }
+
+
+
+ const updatedjob =  await job.save();
+
+
+   if(updatedjob){
+       res.status(201).send({
+           success: true,
+           message: "Job Status updated",
+           updatedjob
+         });
+   }
+   
+  } catch (error) {
+   res.status(500).send({
+       success: false,
+       message: "Errro in updating Job status",
+       error,
+     });
+  }
+}
+

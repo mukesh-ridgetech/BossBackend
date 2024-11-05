@@ -70,6 +70,43 @@ export const updateAdminPost = async (req, res) => {
     }
 };
 
+
+export const toggeled = async(req,res)=>{
+    try {
+     const { id } = req.params;
+    
+
+     // Find the admin by ID
+     let admin = await AdminPost.findById(id);
+     if(admin.status ==='Active'){
+         admin.status = "Inactive";
+     }
+     else{
+         admin.status = "Active"
+     }
+
+
+
+   const updatedAdmin =  await admin.save();
+
+
+     if(updatedAdmin){
+         res.status(201).send({
+             success: true,
+             message: "Vacany Status updated",
+             updatedAdmin
+           });
+     }
+     
+    } catch (error) {
+     res.status(500).send({
+         success: false,
+         message: "Errro in updating Vacancy status",
+         error,
+       });
+    }
+}
+
 // Delete an Admin Post by ID
 export const deleteAdminPost = async (req, res) => {
     try {

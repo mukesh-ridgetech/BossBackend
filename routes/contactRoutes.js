@@ -4,7 +4,8 @@ import {
     getAllContacts,
     getContactById,
     updateContact,
-    deleteContact
+    deleteContact,
+    toggeled
 } from '../controllers/contactController.js';
 
 const router = express.Router();
@@ -20,6 +21,7 @@ router.get('/getContactById/:id', getContactById);
 
 // PUT: Update a contact by ID
 router.put('/updateContact/:id', updateContact);
+router.patch('/toggled/:id',  toggeled);
 
 // DELETE: Delete a contact by ID
 router.delete('/deleteContact/:id', deleteContact);
