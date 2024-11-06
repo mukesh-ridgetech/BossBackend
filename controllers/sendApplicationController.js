@@ -3,9 +3,9 @@ import SendApplication from '../models/sendApplicationModel.js';
 // Create a new contact entry
 export const createSendApplication = async (req, res) => {
     try {
-        const { firstName, lastName, phoneNumber, email, pdf } = req.body;
+        const { firstName, lastName, phoneNumber, email, pdf,job } = req.body;
 
-        const newSendApplication = new SendApplication({ firstName, lastName, phoneNumber, email, pdf });
+        const newSendApplication = new SendApplication({ firstName, lastName, phoneNumber, email, pdf ,job});
         await newSendApplication.save();
 
         res.status(201).json({
@@ -25,7 +25,7 @@ export const createSendApplication = async (req, res) => {
 // Get all SendApplication entries
 export const getAllSendApplication = async (req, res) => {
     try {
-        const sendApplications = await SendApplication.find({});
+        const sendApplications = await SendApplication.find({}).populate('job');
         res.status(200).json({
             success: true,
             sendApplications,

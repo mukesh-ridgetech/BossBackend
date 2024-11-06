@@ -27,6 +27,11 @@ const sendApplicationSchema = new mongoose.Schema({
         type:String,
         default:"Active"
     },
+
+    job: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Job',
+      },
 }, { timestamps: true });
 
 const SendApplication = mongoose.model('SendApplication', sendApplicationSchema);

@@ -53,7 +53,8 @@ export const createPersonalDetails = async (req, res) => {
       driversLicense,
       drivingLicenseCategory,
       ownVehicle,
-      currentlyEmployed
+      currentlyEmployed,
+      job
     } = req.body;
 
     const newDetails = new PersonalDetails({
@@ -81,7 +82,8 @@ export const createPersonalDetails = async (req, res) => {
       driversLicense,
       drivingLicenseCategory,
       ownVehicle,
-      currentlyEmployed
+      currentlyEmployed,
+      job
     });
 
     await newDetails.save();
@@ -97,7 +99,7 @@ export const createPersonalDetails = async (req, res) => {
 // @access  Public
 export const getPersonalDetails = async (req, res) => {
   try {
-    const details = await PersonalDetails.find();
+    const details = await PersonalDetails.find().populate('job');
     res.status(200).json(details);
   } catch (error) {
     console.error(error.message);

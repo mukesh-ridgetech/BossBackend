@@ -72,6 +72,11 @@ highEducatioin:{
   type:String,
 },
 
+job: {
+  type: mongoose.Schema.Types.ObjectId,
+  ref: 'Job',
+},
+
 
 }, { timestamps: true });
 
