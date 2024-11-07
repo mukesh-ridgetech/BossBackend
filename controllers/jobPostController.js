@@ -298,3 +298,18 @@ export const toggeled = async(req,res)=>{
   }
 }
 
+
+
+export const getJobNames = async (req, res) => {
+  try {
+    // Fetch only jobName from all job documents
+    const jobs = await Job.find({}, 'jobName');
+    
+    // Send the response with the job names
+    res.status(200).json(jobs);
+  } catch (error) {
+    console.error('Error fetching job names:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+

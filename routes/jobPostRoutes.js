@@ -8,6 +8,7 @@ import {
   filterJobs,
   getFilteredJobs,
   toggeled,
+  getJobNames,
 } from '../controllers/jobPostController.js';
 
 const router = express.Router();
@@ -17,6 +18,7 @@ router.post('/createJob', createJob);
 
 // Get all jobs
 router.get('/getAllJobs', getAllJobs);
+router.get('/jobNames', getJobNames);
 
 // Get job by ID
 router.get('/getJobById/:id', getJobById);
