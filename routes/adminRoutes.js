@@ -14,7 +14,7 @@ router.post('/login', loginAdmin);
 router.put('/update/:id', updateUser);
 router.patch('/toggled/:id', toggeled);
 
-router.get('/getUsers',authenticate, getAllUser);
+router.get('/getUsers', getAllUser);
 
 // Onboard new admin (protected route)
 router.post('/onboard', authenticate, onboardAdmin);

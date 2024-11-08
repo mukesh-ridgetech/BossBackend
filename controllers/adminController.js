@@ -48,23 +48,37 @@ export const loginAdmin = async (req, res) => {
     try {
         const admin = await Admin.findOne({ email });
 
-        // Check if admin exists and password matches
-        if (admin && (await bcrypt.compare(password, admin.password))) {
-            res.status(201).send({
+        // Check if admin exists
+        if (!admin) {
+            return res.status(401).json({ message: 'Invalid email or password' });
+        }
+
+        // Check if admin is inactive
+        if (admin.Status === 'Inactive') {
+            return res.status(403).json({
+                success: false,
+                message: 'Your account is inactive. Please contact the administrator.'
+            });
+        }
+
+        // Check if password matches
+        const isMatch = await bcrypt.compare(password, admin.password);
+        if (isMatch) {
+            res.status(201).json({
                 success: true,
-                message: "User Login Successfully",
+                message: 'User Login Successfully',
                 admin,
                 token: generateToken(admin._id),
-              });
+            });
         } else {
             res.status(401).json({ message: 'Invalid email or password' });
         }
     } catch (error) {
-        res.status(500).send({
+        res.status(500).json({
             success: false,
-            message: "Errro in Login",
+            message: 'Error in Login',
             error,
-          });
+        });
     }
 };
 export const getAllUser = async(req,res)=>{

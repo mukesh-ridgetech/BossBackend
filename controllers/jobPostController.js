@@ -313,3 +313,36 @@ export const getJobNames = async (req, res) => {
   }
 };
 
+
+
+export const getJobsByCategory = async (req, res) => {
+  const { category } = req.body; // You can pass the category as a query parameter
+ console.log(category)
+  try {
+    // Find jobs based on the category
+    const jobs = await Job.find({
+      category: { $regex: new RegExp(category, "i") }, // "i" for case-insensitive
+      status: "Active"
+    });
+     console.log(jobs);
+    if (jobs.length > 0) {
+      res.status(200).json({
+        success: true,
+        jobs,
+        message: `${jobs.length} job(s) found in ${category} category`
+      });
+    } else {
+      res.status(404).json({
+        success: false,
+        message: `No jobs found in the ${category} category`
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: 'Error fetching jobs',
+      error: error.message
+    });
+  }
+};
+

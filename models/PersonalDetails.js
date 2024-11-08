@@ -11,7 +11,7 @@ const personalDetailsSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   dutchPassport: { type: String, required: true },
   driversLicense: { type: String, required: true },
-  drivingLicenseCategory: { type: String, required: true },
+  drivingLicenseCategory: { type: String },
   ownVehicle: { type: String, required: true },
   currentlyEmployed: { type: String, required: true },
   status:{
