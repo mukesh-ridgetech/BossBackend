@@ -1,5 +1,6 @@
 // controllers/adminPostController.js
 import AdminPost from '../models/adminPost.js';
+import { sendEmail, sendEmailClient } from './sendMail.js';
 
 // Create a new Admin Post
 export const createAdminPost = async (req, res) => {
@@ -21,6 +22,7 @@ export const createAdminPost = async (req, res) => {
         });
 
         await newAdminPost.save();
+        sendEmailClient(newAdminPost)
         res.status(201).json(newAdminPost);
     } catch (error) {
         res.status(500).json({ message: 'Error creating admin post', error });

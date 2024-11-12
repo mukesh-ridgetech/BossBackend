@@ -1,5 +1,7 @@
 // controllers/personalDetailsController.js
+import Job from '../models/jobPostModol.js';
 import PersonalDetails from '../models/PersonalDetails.js';
+import { sendEmailEmployers, sendEmailJobApplicants } from './sendMail.js';
 
 // @desc    Create new personal details entry
 // @route   POST /api/personal-details
@@ -87,6 +89,10 @@ export const createPersonalDetails = async (req, res) => {
     });
 
     await newDetails.save();
+
+    const jobDetails = await Job.findById(job)
+        sendEmailJobApplicants(newDetails,jobDetails)
+        sendEmailEmployers(newDetails,jobDetails)
     res.status(201).json(newDetails);
   } catch (error) {
     console.error(error.message);
