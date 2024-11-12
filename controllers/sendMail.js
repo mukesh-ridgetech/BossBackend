@@ -118,19 +118,23 @@ export const sendEmailEmployers = async (user, job) => {
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: job.email,
-      subject: `New Application for Position: ${job.jobName}`,
-      text: `Hello,
+      subject: `Thank You for Your Job Application `,
+      text: `Dear ${user.firstName},
 
-    You have received a new job application for the position of ${job.jobName}.
-    Here are the applicant's details:
+    Thank you for applying for the ${job.jobName} position. We appreciate your interest in the role.
 
-    1. Name: ${user.firstName} ${user.lastName}
-    2. Email: ${user.email}
-    3. Phone: ${user.phoneNumber}
-    4. Job Description: ${job.jobDescription}
+Our recruitment team is currently reviewing your application along with others. If your profile aligns with the client's requirements, we will contact you within the next 1-2 weeks regarding the next steps.
+
+In the meantime, if you have any questions, feel free to reach out to us.
+
+Thank you for your time and interest in the opportunity.
+
 
     Best regards,
-    Boss`,
+   BOSS Recruitment Team,
+   `
+
+
     };
 
     await transporter.sendMail(mailOptions);
@@ -146,21 +150,23 @@ export const sendEmailClient = async (user) => {
   try {
     const mailOptions = {
       from: process.env.EMAIL_USER,
-      to: user.email,
-      subject: `We have received your job posting request`,
-      text: `Hello ${user.firstName},
+      to: 'ginger@bossservices.biz',
+      subject: `New Vacancy Submission Received for "We Find Professionals for You!`,
+      text: `Dear Ginger,
 
-We have received your request to post a job on our website.
-Here are the details we collected from the contact form:
+A new vacancy request has been submitted through our "We Find Professionals for You!" service. Please follow up with the client to gather additional details and begin the recruitment process.
 
-1. Name: ${user.firstName} ${user.lastName}
-2. Email: ${user.email}
-3. Phone: ${user.phoneNumber}
+Here are the initial details of the client submission:
 
-Thank you for reaching out! We will get back to you shortly with more information.
+1.Client Name: ${user.firstName}
+2.Email:  ${user.email}
+3.Phone: ${user.phoneNumber}
 
-Best wishes,
-Boss`,
+
+Please reach out to the client within 1-2 business days to discuss the position specifics and confirm their requirements.
+
+Best regards,
+BOSS Recruitment Team`,
     };
 
     await transporter.sendMail(mailOptions);

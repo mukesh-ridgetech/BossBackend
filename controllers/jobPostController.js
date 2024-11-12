@@ -59,10 +59,14 @@ import Job from '../models/jobPostModol.js';
 export const createJob = async (req, res) => {
   try {
 
-    const { location, category, jobType, upper_jd, jobName,jobDescription,image,responsibilities ,phone,requirements,logo,email} = req.body;
+    const { location, category, jobType, upper_jd, jobName,jobDescription,image,responsibilities ,phone,requirements,logo,email,agree} = req.body;
     const newJob = new Job({ location, category, jobType, upper_jd, jobName,jobDescription,image,responsibilities ,phone,requirements,logo,email});
     const savedJob = await newJob.save();
-    postToFacebookFeed(savedJob)
+
+    if(agree){
+      postToFacebookFeed(savedJob)
+    }
+    
     if(savedJob){
         res.status(201).json({
             success: true,
