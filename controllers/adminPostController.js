@@ -1,6 +1,6 @@
 // controllers/adminPostController.js
 import AdminPost from '../models/adminPost.js';
-import { sendEmail, sendEmailClient } from './sendMail.js';
+import { sendEmail, sendEmailClient, sendEmailEmployers } from './sendMail.js';
 
 // Create a new Admin Post
 export const createAdminPost = async (req, res) => {
@@ -8,10 +8,10 @@ export const createAdminPost = async (req, res) => {
         const { firstName, lastName, phoneNumber, email, pdf } = req.body;
 
         // Check if email already exists
-        const existingPost = await AdminPost.findOne({ email });
-        if (existingPost) {
-            return res.status(400).json({ message: 'Email already exists' });
-        }
+        // const existingPost = await AdminPost.findOne({ email });
+        // if (existingPost) {
+        //     return res.status(400).json({ message: 'Email already exists' });
+        // }
 
         const newAdminPost = new AdminPost({
             firstName,
@@ -23,6 +23,7 @@ export const createAdminPost = async (req, res) => {
 
         await newAdminPost.save();
         sendEmailClient(newAdminPost)
+        
         res.status(201).json(newAdminPost);
     } catch (error) {
         res.status(500).json({ message: 'Error creating admin post', error });

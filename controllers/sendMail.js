@@ -150,23 +150,21 @@ export const sendEmailClient = async (user) => {
   try {
     const mailOptions = {
       from: process.env.EMAIL_USER,
-      to: 'applications@bossservices.biz',
-      subject: `New Vacancy Submission Received for "We Find Professionals for You!`,
-      text: `Dear Ginger,
+      to: user.email,
+      subject: `Thank You for Posting Your Vacancy with Us!`,
+      text: `Dear,${user.firstName},
+Thank you for choosing BOSS Recruitment to assist with your hiring needs. We’ve received the vacancy details you submitted under our "We Find Professionals for You!" service, and our team is ready to help you find the ideal candidate for the [Job Title] position.
 
-A new vacancy request has been submitted through our "We Find Professionals for You!" service. Please follow up with the client to gather additional details and begin the recruitment process.
+One of our recruitment specialists will contact you shortly to gather details about the position and your specific requirements. Expect an update from us within the next 1-2 business days to get started.
 
-Here are the initial details of the client submission:
+In the meantime, if you have any questions or would like to share additional information, please feel free to reply to this email.
 
-1.Client Name: ${user.firstName}
-2.Email:  ${user.email}
-3.Phone: ${user.phoneNumber}
-
-
-Please reach out to the client within 1-2 business days to discuss the position specifics and confirm their requirements.
+Thank you again for choosing  BOSS Recruitment. We’re excited to support you in building a successful team.
 
 Best regards,
-BOSS Recruitment Team`,
+BOSS Recruitment Team
+
+`,
     };
 
     await transporter.sendMail(mailOptions);
