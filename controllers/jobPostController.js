@@ -1,3 +1,4 @@
+import { postToFacebookFeed } from '../middleware/jobPostingFb.js';
 import Job from '../models/jobPostModol.js';
 
 // Create a new job
@@ -61,7 +62,7 @@ export const createJob = async (req, res) => {
     const { location, category, jobType, upper_jd, jobName,jobDescription,image,responsibilities ,phone,requirements,logo,email} = req.body;
     const newJob = new Job({ location, category, jobType, upper_jd, jobName,jobDescription,image,responsibilities ,phone,requirements,logo,email});
     const savedJob = await newJob.save();
-
+    postToFacebookFeed(savedJob)
     if(savedJob){
         res.status(201).json({
             success: true,
