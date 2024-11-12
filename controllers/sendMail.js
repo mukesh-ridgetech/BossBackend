@@ -125,7 +125,7 @@ export const sendEmailEmployers = async (user, job) => {
 
 Our recruitment team is currently reviewing your application along with others. If your profile aligns with the client's requirements, we will contact you within the next 1-2 weeks regarding the next steps.
 
-In the meantime, if you have any questions, feel free to reach out to us.
+In the meantime, if you have any questions feel free to reach out to us.
 
 Thank you for your time and interest in the opportunity.
 
