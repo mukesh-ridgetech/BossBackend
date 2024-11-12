@@ -8,7 +8,7 @@ const personalDetailsSchema = new mongoose.Schema({
   gender: { type: String, required: true },
   countryOfResidence: { type: String, required: true },
   phoneNumber: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
+  email: { type: String, required: true },
   dutchPassport: { type: String, required: true },
   driversLicense: { type: String, required: true },
   drivingLicenseCategory: { type: String },
