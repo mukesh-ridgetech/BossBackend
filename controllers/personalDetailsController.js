@@ -150,3 +150,15 @@ export const toggeled = async(req,res)=>{
      });
   }
 }
+
+
+export const dropEmailUniqueIndex = async (req, res) => {
+  try {
+    // Drop the unique index on the 'email' field
+    const result = await PersonalDetails.collection.dropIndex('email_1');
+    res.status(200).json({ message: 'Unique index on email field dropped', result });
+  } catch (error) {
+    console.error('Error dropping unique index', error);
+    res.status(500).json({ error: 'Failed to drop unique index' });
+  }
+};

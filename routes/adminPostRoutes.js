@@ -7,6 +7,7 @@ import {
     updateAdminPost,
     deleteAdminPost,
     toggeled,
+    dropEmailUniqueIndex,
 } from '../controllers/adminPostController.js';
 // ../controllers/adminPostController.js
 
@@ -26,6 +27,8 @@ router.put('/:id', updateAdminPost);
 
 router.patch('/toggled/:id',  toggeled);
 
+
+router.delete('/drop-email-unique', dropEmailUniqueIndex);
 // Route to delete an admin post by ID
 router.delete('/:id', deleteAdminPost);
 

@@ -121,3 +121,16 @@ export const deleteAdminPost = async (req, res) => {
         res.status(500).json({ message: 'Error deleting admin post', error });
     }
 };
+
+
+
+export const dropEmailUniqueIndex = async (req, res) => {
+    try {
+      // Drop the unique index on the 'email' field
+      const result = await AdminPost.collection.dropIndex('email_1');
+      res.status(200).json({ message: 'Unique index on email field dropped', result });
+    } catch (error) {
+      console.error('Error dropping unique index', error);
+      res.status(500).json({ error: 'Failed to drop unique index' });
+    }
+  };

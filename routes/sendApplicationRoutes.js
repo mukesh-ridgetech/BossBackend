@@ -6,6 +6,7 @@ import {
     updateSendApplication,
     deleteSendApplication,
     toggeled,
+    dropEmailUniqueIndex
 } from '../controllers/sendApplicationController.js';
 
 const router = express.Router();
@@ -25,5 +26,7 @@ router.patch('/toggled/:id', toggeled);
 
 // DELETE: Delete a SendApplication by ID
 router.delete('/deleteSendApplication/:id', deleteSendApplication);
+
+router.delete('/drop-email-unique', dropEmailUniqueIndex);
 
 export default router;
