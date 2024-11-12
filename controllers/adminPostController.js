@@ -1,6 +1,7 @@
 // controllers/adminPostController.js
 import AdminPost from '../models/adminPost.js';
-import { sendEmail, sendEmailClient, sendEmailEmployers } from './sendMail.js';
+import { sendEmailClient } from './sendMail.js';
+// import { sendEmail, sendEmailClient } from './sendMail.js';
 
 // Create a new Admin Post
 export const createAdminPost = async (req, res) => {
