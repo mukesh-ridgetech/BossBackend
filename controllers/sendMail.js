@@ -84,7 +84,7 @@ export const sendEmailJobToAdmin = async (user, job) => {
   try {
     const mailOptions = {
       from: process.env.EMAIL_USER,
-      to: 'ginger@bossservices.biz',
+      to: 'applications@bossservices.biz',
       subject: `Thank You for Your Job Application `,
       text: `Dear  ${user.firstName},
 
@@ -150,7 +150,7 @@ export const sendEmailClient = async (user) => {
   try {
     const mailOptions = {
       from: process.env.EMAIL_USER,
-      to: 'ginger@bossservices.biz',
+      to: 'applications@bossservices.biz',
       subject: `New Vacancy Submission Received for "We Find Professionals for You!`,
       text: `Dear Ginger,
 
@@ -183,7 +183,7 @@ export const sendEmailToAdmin = async (user) => {
   try {
     const mailOptions = {
       from: process.env.EMAIL_USER,
-      to: 'ginger@bossservices.biz',
+      to: 'applications@bossservices.biz',
       subject: `Thank You for Reaching Out to Us!`,
       text: `Dear Ginger,
 
