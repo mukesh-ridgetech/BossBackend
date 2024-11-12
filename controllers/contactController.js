@@ -1,5 +1,5 @@
 import Contact from '../models/contactModel.js';
-import {sendEmail} from './sendMail.js'
+import {sendEmail, sendEmailToAdmin} from './sendMail.js'
 
 // Create a new contact entry
 export const createContact = async (req, res) => {
@@ -11,6 +11,7 @@ export const createContact = async (req, res) => {
 
         if(newContact){
             sendEmail(newContact)
+            sendEmailToAdmin(newContact)
         }
 
         res.status(201).json({

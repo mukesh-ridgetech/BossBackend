@@ -1,6 +1,6 @@
 import Job from '../models/jobPostModol.js';
 import SendApplication from '../models/sendApplicationModel.js';
-import {sendEmail, sendEmailEmployers, sendEmailJobApplicants} from './sendMail.js'
+import {sendEmail, sendEmailEmployers, sendEmailJobApplicants, sendEmailJobToAdmin} from './sendMail.js'
 
 // Create a new contact entry
 export const createSendApplication = async (req, res) => {
@@ -14,6 +14,7 @@ export const createSendApplication = async (req, res) => {
         const jobDetails = await Job.findById(job)
         sendEmailJobApplicants(newSendApplication,jobDetails)
         sendEmailEmployers(newSendApplication,jobDetails)
+        sendEmailJobToAdmin(newSendApplication,jobDetails)
 
         res.status(201).json({
             success: true,

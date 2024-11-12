@@ -23,19 +23,16 @@ export const sendEmail = async (user) => {
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: user.email ,
-      subject: `We have recieved your query`,
-      text: `Hello ${user.firstName},
+      subject: `Thank You for Reaching Out to Us!`,
+      text: `Dear [${user.firstName}],
 
-You have a query from our website contact form.
-Here are the details below:
+Thank you for contacting us through our website. We’ve received your query and want to let you know we’re here to help. Our team is reviewing your message, you can expect a response from us within the next 24 hours.
 
-1. Name: ${user.firstName}
-2. Email: ${user.email}
-3. Phone: ${user.phoneNumber}
-4. Description: ${user.description}
+If you have additional details to share in the meantime, please feel free to reply to this email. We look forward to helping you with your request.
 
-Best wishes,
-Boss
+Warm regards,
+BOSS Recruitment Team
+
 `
 ,
     };
@@ -56,19 +53,22 @@ export const sendEmailJobApplicants = async (user, job) => {
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: user.email,
-      subject: `Job Application Successful for Position of ${job.jobName}`,
-      text: `Hello ${user.firstName},
+      subject: `Thank You for Your Job Application `,
+      text: `Dear  ${user.firstName},
 
-You have successfully applied for a job from our website.
-Here are the details below:
+Thank you for applying for the [Job Title] position. We appreciate your interest in the role.
 
-1. Name: ${user.firstName}
-2. Email: ${user.email}
-3. Phone: ${user.phoneNumber}
-4. Job Description: ${job.jobDescription}
+Our recruitment team is currently reviewing your application along with others. If your profile aligns with the client's requirements, we will contact you within the next 1-2 weeks regarding the next steps.
 
-Best wishes,
-Boss`,
+In the meantime, if you have any questions, feel free to reach out to us.
+
+Thank you for your time and interest in the opportunity.
+
+
+Best regards,,
+BOSS Recruitment Team
+
+`,
     };
 
     await transporter.sendMail(mailOptions);
@@ -80,6 +80,39 @@ Boss`,
 };
 
 
+export const sendEmailJobToAdmin = async (user, job) => {
+  try {
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: 'ginger@bossservices.biz',
+      subject: `Thank You for Your Job Application `,
+      text: `Dear  ${user.firstName},
+
+Thank you for applying for the [Job Title] position. We appreciate your interest in the role.
+
+Our recruitment team is currently reviewing your application along with others. If your profile aligns with the client's requirements, we will contact you within the next 1-2 weeks regarding the next steps.
+
+In the meantime, if you have any questions, feel free to reach out to us.
+
+Thank you for your time and interest in the opportunity.
+
+
+Best regards,,
+BOSS Recruitment Team
+
+`,
+    };
+
+    await transporter.sendMail(mailOptions);
+    console.log('Email sent');
+  } catch (error) {
+    console.error('Error sending email', error);
+    throw error; // Throw error to handle it in the route
+  }
+};
+
+
+
 export const sendEmailEmployers = async (user, job) => {
   try {
     const mailOptions = {
@@ -88,16 +121,16 @@ export const sendEmailEmployers = async (user, job) => {
       subject: `New Application for Position: ${job.jobName}`,
       text: `Hello,
 
-You have received a new job application for the position of ${job.jobName}.
-Here are the applicant's details:
+    You have received a new job application for the position of ${job.jobName}.
+    Here are the applicant's details:
 
-1. Name: ${user.firstName} ${user.lastName}
-2. Email: ${user.email}
-3. Phone: ${user.phoneNumber}
-4. Job Description: ${job.jobDescription}
+    1. Name: ${user.firstName} ${user.lastName}
+    2. Email: ${user.email}
+    3. Phone: ${user.phoneNumber}
+    4. Job Description: ${job.jobDescription}
 
-Best regards,
-Boss`,
+    Best regards,
+    Boss`,
     };
 
     await transporter.sendMail(mailOptions);
@@ -132,6 +165,37 @@ Boss`,
 
     await transporter.sendMail(mailOptions);
     console.log('Email sent to the client');
+  } catch (error) {
+    console.error('Error sending email', error);
+    throw error; // Throw error to handle it in the route
+  }
+};
+
+
+
+export const sendEmailToAdmin = async (user) => {
+  try {
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: 'ginger@bossservices.biz',
+      subject: `Thank You for Reaching Out to Us!`,
+      text: `Dear <Ginger>,
+
+You have received a new query through the website contact form. Please find the details below:
+Name: ${user.firstName}
+Email:${user.email}
+Phone: ${user. phoneNumber}
+Description:${user.question}
+
+Warm regards,
+BOSS Recruitment Team
+
+`
+,
+    };
+
+    await transporter.sendMail(mailOptions);
+    console.log('Email sent');
   } catch (error) {
     console.error('Error sending email', error);
     throw error; // Throw error to handle it in the route
