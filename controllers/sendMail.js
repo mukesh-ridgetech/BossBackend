@@ -24,7 +24,7 @@ export const sendEmail = async (user) => {
       from: process.env.EMAIL_USER,
       to: user.email ,
       subject: `Thank You for Reaching Out to Us!`,
-      text: `Dear [${user.firstName}],
+      text: `Dear ${user.firstName},
 
 Thank you for contacting us through our website. We’ve received your query and want to let you know we’re here to help. Our team is reviewing your message, you can expect a response from us within the next 24 hours.
 
@@ -56,7 +56,7 @@ export const sendEmailJobApplicants = async (user, job) => {
       subject: `Thank You for Your Job Application `,
       text: `Dear  ${user.firstName},
 
-Thank you for applying for the [Job Title] position. We appreciate your interest in the role.
+Thank you for applying for the ${job.jobName} position. We appreciate your interest in the role.
 
 Our recruitment team is currently reviewing your application along with others. If your profile aligns with the client's requirements, we will contact you within the next 1-2 weeks regarding the next steps.
 
@@ -88,7 +88,7 @@ export const sendEmailJobToAdmin = async (user, job) => {
       subject: `Thank You for Your Job Application `,
       text: `Dear  ${user.firstName},
 
-Thank you for applying for the [Job Title] position. We appreciate your interest in the role.
+Thank you for applying for the ${job.jobName} position. We appreciate your interest in the role.
 
 Our recruitment team is currently reviewing your application along with others. If your profile aligns with the client's requirements, we will contact you within the next 1-2 weeks regarding the next steps.
 
@@ -179,7 +179,7 @@ export const sendEmailToAdmin = async (user) => {
       from: process.env.EMAIL_USER,
       to: 'ginger@bossservices.biz',
       subject: `Thank You for Reaching Out to Us!`,
-      text: `Dear <Ginger>,
+      text: `Dear Ginger,
 
 You have received a new query through the website contact form. Please find the details below:
 Name: ${user.firstName}
