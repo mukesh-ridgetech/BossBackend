@@ -145,14 +145,14 @@ Thank you for your time and interest in the opportunity.
 };
 
 
-export const sendEmailClient = async (user,job) => {
+export const sendEmailClient = async (user) => {
   try {
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: user.email,
       subject: `Thank You for Posting Your Vacancy with Us!`,
       text: `Dear ${user.firstName},
-Thank you for choosing BOSS Recruitment to assist with your hiring needs. We’ve received the vacancy details you submitted under our "We Find Professionals for You!" service, and our team is ready to help you find the ideal candidate for the ${job.jobName} position.
+Thank you for choosing BOSS Recruitment to assist with your hiring needs. We’ve received the vacancy details you submitted under our "We Find Professionals for You!" service, and our team is ready to help you find the ideal candidate for the  position.
 
 One of our recruitment specialists will contact you shortly to gather details about the position and your specific requirements. Expect an update from us within the next 1-2 business days to get started.
 
@@ -175,7 +175,7 @@ BOSS Recruitment Team
 };
 
 
-export const sendEmailCLientToAdmin = async (user,job) => {
+export const sendEmailCLientToAdmin = async (user) => {
   try {
     const mailOptions = {
       from: process.env.EMAIL_USER,

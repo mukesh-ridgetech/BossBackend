@@ -26,6 +26,11 @@ const adminPostSchema = new mongoose.Schema({
         type:String,
         default:"Active"
     },
+
+    job: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Job',
+      },
 }, { timestamps: true });
 
 const AdminPost = mongoose.model('AdminPost', adminPostSchema);

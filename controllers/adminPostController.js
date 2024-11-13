@@ -22,11 +22,12 @@ export const createAdminPost = async (req, res) => {
             email,
             pdf,
         });
-      
-        const jobDetails = await Job.findById(job)
+         
+        
+        // const jobDetails = await Job.findById(job)
         await newAdminPost.save();
-        sendEmailClient(newAdminPost,jobDetails)
-        sendEmailCLientToAdmin(newAdminPost,jobDetails)
+        sendEmailClient(newAdminPost)
+        sendEmailCLientToAdmin(newAdminPost)
         
         res.status(201).json(newAdminPost);
     } catch (error) {
