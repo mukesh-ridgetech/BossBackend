@@ -7,7 +7,7 @@ import generateToken from '../utils/generateToken.js';
 // @access Public
 export const registerAdmin = async (req, res) => {
     const { name, email, password } = req.body;
-  console.log(name);
+  
     try {
         // Check if admin exists
         const adminExists = await Admin.findOne({ email });
