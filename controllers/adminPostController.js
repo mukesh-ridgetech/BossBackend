@@ -1,6 +1,7 @@
 // controllers/adminPostController.js
 import AdminPost from '../models/adminPost.js';
-import { sendEmailClient } from './sendMail.js';
+import Job from '../models/jobPostModol.js';
+import { sendEmailClient, sendEmailCLientToAdmin } from './sendMail.js';
 // import { sendEmail, sendEmailClient } from './sendMail.js';
 
 // Create a new Admin Post
@@ -21,9 +22,11 @@ export const createAdminPost = async (req, res) => {
             email,
             pdf,
         });
-
+      
+        const jobDetails = await Job.findById(job)
         await newAdminPost.save();
-        sendEmailClient(newAdminPost)
+        sendEmailClient(newAdminPost,jobDetails)
+        sendEmailCLientToAdmin(newAdminPost,jobDetails)
         
         res.status(201).json(newAdminPost);
     } catch (error) {
