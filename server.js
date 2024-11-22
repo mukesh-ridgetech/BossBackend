@@ -9,6 +9,7 @@ import jobPostRoutes from './routes/jobPostRoutes.js'
 import personalDetailsRoutes from './routes/personalDetailsRoutes.js';
 import adminPostRoutes from './routes/adminPostRoutes.js'
 import emailRoutes from './routes/emailRoutes.js';
+import cron from "node-cron";
 import cors from 'cors'
 dotenv.config();
 
@@ -22,6 +23,11 @@ app.use(cors())
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use('/uploads', express.static('uploads'));
+
+cron.schedule("*/5 * * * *", () => {
+    console.log("Cron job executed at", new Date());
+    // Add your task logic here
+  });
 
 // Contact routes
 app.use('/api/admin', adminRoutes);
