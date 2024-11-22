@@ -165,43 +165,53 @@ export const filterJobs = async (req, res) => {
     // If no keyword is provided, return all jobs
     if (!keyword) {
       const jobs = await Job.find({});
-      return res.status(200).json(jobs);
+      return res.status(200).json({
+        success: true,
+        message: 'All jobs fetched successfully',
+        jobs
+      });
     }
-    // location, category, jobType, upper_jd, jobName,jobDescription,image,responsibilities ,phone,requirements,logo,email
-    // Case-insensitive search: match the keyword in jobName or jobDescription
+
+    // Case-insensitive search: match the keyword in jobName, jobDescription, location, etc.
     const jobs = await Job.find({
       $or: [
-        { jobName: { $regex: keyword, $options: 'i' } }, // Case-insensitive search for jobName
-        { jobDescription: { $regex: keyword, $options: 'i' } }, // Case-insensitive search for jobDescription
+        { jobName: { $regex: keyword, $options: 'i' } }, 
+        { jobDescription: { $regex: keyword, $options: 'i' } },
         { location: { $regex: keyword, $options: 'i' } },
         { jobType: { $regex: keyword, $options: 'i' } },
         { category: { $regex: keyword, $options: 'i' } },
         { responsibilities: { $regex: keyword, $options: 'i' } },
         { requirements: { $regex: keyword, $options: 'i' } },
-        { upper_jd: { $regex: keyword, $options: 'i' } },
-        // requirements
+        { upper_jd: { $regex: keyword, $options: 'i' } }
       ]
     });
 
+    // Return result whether jobs found or not
     if (jobs.length === 0) {
-      return res.status(404).json({ message: 'No jobs found' });
+      return res.status(200).json({
+        success: true,
+        message: 'No jobs found for the provided keyword',
+        jobs: [] // Return empty array if no jobs found
+      });
     }
 
-    res.status(201).json({
+    // Return the found jobs
+    res.status(200).json({
       success: true,
-      message: 'jobPost Search successfully',
-      job:jobs
-  });
+      message: 'Jobs fetched successfully',
+      jobs
+    });
 
-    // res.status(200).json(jobs);
   } catch (error) {
+    // Handle error
     res.status(500).json({
       success: false,
-      message: 'Error Searching jobPost',
-      error: error.message,
-  });
+      message: 'Error searching job posts',
+      error: error.message
+    });
   }
 };
+
 
 
 export const getFilteredJobs = async (req, res) => {
